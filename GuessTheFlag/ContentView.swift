@@ -12,6 +12,10 @@ struct ContentView: View {
     @State private var isShowingScore: Bool = false
     @State private var scoreTitle = ""
     
+    @State private var questionCount = 0
+    
+    @State private var usersScore = 0
+    
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "US"].shuffled()
     @State private var correctAnswer = Int.random(in: 0...2)
     
@@ -25,11 +29,11 @@ struct ContentView: View {
                 .ignoresSafeArea()
             VStack{
                 Spacer()
-
-                Text("Guess the Flag")
-                    .font(.largeTitle.bold())
-                    .foregroundColor(.white)
-                
+              
+                    Text("Guess the Flag")
+                        .font(.largeTitle.bold())
+                        .foregroundColor(.white)
+            
                 VStack(){
                     VStack{
                         Text("Tap the flag of")
@@ -50,9 +54,18 @@ struct ContentView: View {
                         }
                         
                         .alert(scoreTitle, isPresented: $isShowingScore){
-                            Button("Continue", action: askNewQuestion)
+                            if questionCount != 8 {
+                                Button("Continue", action: askNewQuestion)
+                            } else {
+                                Button("Start again", action: askNewQuestion)
+                            }
                         } message: {
-                            Text("Your score is ???")
+                            if questionCount < 8 {
+                                Text("Your score is \(usersScore)")
+                            } else {
+                                Text("")
+                            }
+                            
                         }
                     }
                     
@@ -64,7 +77,7 @@ struct ContentView: View {
                 Spacer()
                 Spacer()
 
-                Text("Your score is: ???")
+                Text("Your score is: \(usersScore)")
                     .foregroundColor(.white)
                     .font(.title2.weight(.bold))
                 Spacer()
@@ -80,16 +93,29 @@ struct ContentView: View {
     func correct (_ number: Int){
         if number == correctAnswer {
             scoreTitle = "Correct"
+            usersScore += 10
         } else {
-            scoreTitle = "Wrong"
+            scoreTitle = "Wrong, that's the flag of \(countries[number])"
+            if usersScore > 0 {
+                usersScore -= 5
+            }
         }
+        questionCount += 1
         isShowingScore = true
+        
+        if questionCount == 8 {
+            scoreTitle = "That's it! Your final score is: \(usersScore)"
+            usersScore = 0
+            
+        }
     }
     
     func askNewQuestion(){
-        countries.shuffle()
-        correctAnswer = Int.random(in: 0...2)
-    }
+            countries.shuffle()
+            correctAnswer = Int.random(in: 0...2)
+        
+        }
+      
 }
 
 struct ContentView_Previews: PreviewProvider {
