@@ -14,6 +14,8 @@
 		3236477B290B954800795816 /* GuessTheFlagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3236477A290B954800795816 /* GuessTheFlagTests.swift */; };
 		32364785290B954800795816 /* GuessTheFlagUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32364784290B954800795816 /* GuessTheFlagUITests.swift */; };
 		32364787290B954800795816 /* GuessTheFlagUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32364786290B954800795816 /* GuessTheFlagUITestsLaunchTests.swift */; };
+		32364806290E7DB900795816 /* flagImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32364805290E7DB900795816 /* flagImageView.swift */; };
+		32364808290E81AD00795816 /* modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32364807290E81AD00795816 /* modifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		32364780290B954800795816 /* GuessTheFlagUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuessTheFlagUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		32364784290B954800795816 /* GuessTheFlagUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessTheFlagUITests.swift; sourceTree = "<group>"; };
 		32364786290B954800795816 /* GuessTheFlagUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessTheFlagUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		32364805290E7DB900795816 /* flagImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flagImageView.swift; sourceTree = "<group>"; };
+		32364807290E81AD00795816 /* modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 			children = (
 				32364769290B954600795816 /* GuessTheFlagApp.swift */,
 				3236476B290B954600795816 /* ContentView.swift */,
+				32364807290E81AD00795816 /* modifier.swift */,
+				32364805290E7DB900795816 /* flagImageView.swift */,
 				3236476D290B954700795816 /* Assets.xcassets */,
 				3236476F290B954700795816 /* Preview Content */,
 			);
@@ -257,6 +263,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32364808290E81AD00795816 /* modifier.swift in Sources */,
+				32364806290E7DB900795816 /* flagImageView.swift in Sources */,
 				3236476C290B954600795816 /* ContentView.swift in Sources */,
 				3236476A290B954600795816 /* GuessTheFlagApp.swift in Sources */,
 			);

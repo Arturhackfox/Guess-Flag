@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+
+
+
 struct ContentView: View {
     
     @State private var isShowingScore: Bool = false
@@ -18,6 +21,9 @@ struct ContentView: View {
     
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "US"].shuffled()
     @State private var correctAnswer = Int.random(in: 0...2)
+    
+    @State private var selectedFlag = -1
+    @State private var ThreeDEffect = 0.0
     
     var body: some View {
         ZStack{
@@ -32,7 +38,7 @@ struct ContentView: View {
               
                     Text("Guess the Flag")
                         .font(.largeTitle.bold())
-                        .foregroundColor(.white)
+                        .prominent()
             
                 VStack(){
                     VStack{
@@ -45,14 +51,19 @@ struct ContentView: View {
                     
                     ForEach(0..<3){ number in
                         Button {
-                            correct(number)
+                                correct(number)
+                            flagTapped(number)
+                                                      
                         } label: {
-                            Image(countries[number])
-                                .clipShape(Capsule())
-                                .shadow(radius: 5)
-                            
+                            flagImageView(countr: countries, number: number)
+                                
+
                         }
-                        
+                        .rotation3DEffect(Angle(degrees: selectedFlag == number ? 360 : 0), axis: (x: 0, y: 1, z: 0))
+                        .opacity(selectedFlag == -1 || selectedFlag == number ? 1.0 : 0.25)
+                        .animation(.default, value: selectedFlag)
+                        .rotation3DEffect(Angle(degrees: selectedFlag != -1 && selectedFlag != number ? -360 : 0), axis: (x: 0, y: 1, z: 0))
+                        .animation(.easeInOut, value: selectedFlag)
                         .alert(scoreTitle, isPresented: $isShowingScore){
                             if questionCount != 8 {
                                 Button("Continue", action: askNewQuestion)
@@ -90,10 +101,17 @@ struct ContentView: View {
         //
     }
     
+    func flagTapped(_ number: Int){
+        selectedFlag = number
+    }
+    
     func correct (_ number: Int){
         if number == correctAnswer {
-            scoreTitle = "Correct"
-            usersScore += 10
+          
+                scoreTitle = "Correct"
+                usersScore += 10
+          
+          
         } else {
             scoreTitle = "Wrong, that's the flag of \(countries[number])"
             if usersScore > 0 {
@@ -113,7 +131,7 @@ struct ContentView: View {
     func askNewQuestion(){
             countries.shuffle()
             correctAnswer = Int.random(in: 0...2)
-        
+            selectedFlag = -1
         }
       
 }
